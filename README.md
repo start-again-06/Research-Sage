@@ -99,6 +99,39 @@ This formulation enables:
 
 The system follows a layered AI-orchestration architecture optimized for modularity and extensibility.
 
+```mermaid
+flowchart TD
+    U[User / Researcher] --> Q[Research Query Input]
+
+    Q --> A[Application Layer<br/>main.py]
+
+    A --> O[AI Orchestration Layer]
+    O --> P[Prompt Construction]
+    P --> T[Tool Invocation Coordinator]
+
+    T --> S1[Web Search Tool<br/>DuckDuckGo]
+    T --> S2[Knowledge Tool<br/>Wikipedia]
+
+    S1 --> K[Retrieved Information]
+    S2 --> K
+
+    K --> R[LLM Reasoning & Synthesis]
+    R --> O2[Structured Research Output]
+
+    O2 --> D[Persistence Layer<br/>Save to File]
+    O2 --> V[Console / Output Display]
+
+    D --> F[research_output.txt]
+
+    subgraph Configuration Layer
+        E[.env<br/>API Keys]
+        C[pyproject.toml<br/>Dependencies]
+    end
+
+    E --> O
+    C --> A
+```
+
 ---
 
 ## Core Layers
